@@ -1,6 +1,6 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main()
@@ -9,17 +9,23 @@ int main()
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int N, K;
-	cin >> N >> K;
+	vector<int> origine;
 
-	vector<int> A(N, 0);
+	int input;
+	cin >> input;
 
-	for (int i = 0; i < N; i++)
+	while (input > 0)
 	{
-		cin >> A[i];
+		origine.push_back(input % 10);
+		input /= 10;
 	}
 
-	sort(A.begin(), A.end());
+	sort(origine.begin(), origine.end(), std::greater<int>());
 
-	std::cout << A[K - 1];
+	for (auto e : origine)
+	{
+		cout << e;
+	}
+
+	return 0;
 }
