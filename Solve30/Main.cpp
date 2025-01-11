@@ -14,22 +14,48 @@ int main()
 
 	vector<int> A(N, 0);
 
-	int sum = 0;
-	for (auto e : A)
+	int start = 0;
+	int end = 0;
+	for (int i = 0; i < N; i++)
 	{
-		cin >> e;
-		sum += e;
+		cin >> A[i];
+		if (start < A[i])
+		{
+			start = A[i];
+		}
+		end += A[i];
 	}
 
-	int minSize = sum / M; // 최소 idx
-	// 가장 최소 일 확률
-	if (sum % M != 0)
+	while (start <= end)
 	{
-		minSize++;
+		int mid = (start + end) / 2;
+		int sum = 0; // 부분적인 합
+		int count = 0;
+
+		for (int i = 0; i < N; i++)
+		{
+			if (sum + A[i] > mid)
+			{
+				count++;
+				sum = 0;
+			}
+			sum += A[i];
+		}
+
+		if (sum != 0)
+		{
+			count++;
+		}
+		if (count > M)
+		{
+			start = mid + 1;
+		}
+		else
+		{
+			end = mid - 1;
+		}
 	}
-
-	
-
+	cout << start;
 
 	return 0;
 }
